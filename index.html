@@ -5,13 +5,13 @@
   
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <link rel="dns-prefetch" href="http://xjywq.com.cn">
+  <link rel="dns-prefetch" href="http://xjywq.me">
   <title>XJYWQ</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="My personal blog -- for study and fun">
 <meta property="og:type" content="website">
 <meta property="og:title" content="XJYWQ">
-<meta property="og:url" content="http://xjywq.com.cn/">
+<meta property="og:url" content="http://xjywq.me/">
 <meta property="og:site_name" content="XJYWQ">
 <meta property="og:description" content="My personal blog -- for study and fun">
 <meta property="og:locale" content="en_US">
@@ -158,6 +158,540 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-markdown-case" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/7/2/markdown-case/">markdown_case</a>
+    </h1>
+  
+
+        
+        <a href="/2020/7/2/markdown-case/" class="archive-article-date">
+  	<time datetime="2020-07-02T09:05:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-语言介绍"><a href="#1-语言介绍" class="headerlink" title="1.语言介绍"></a>1.语言介绍</h2><p><strong>Markdown</strong> 是一种可以使用普通文本编辑器编写的标记语言，通过简单的标记语法，它可以使普通文本内容具有一定的格式。</p>
+<h2 id="2-兼容-HTML"><a href="#2-兼容-HTML" class="headerlink" title="2.兼容 HTML"></a>2.兼容 HTML</h2><p>Markdown 语法的目标是：成为一种适用于网络的书写语言。</p>
+<h2 id="3-特殊符号转化"><a href="#3-特殊符号转化" class="headerlink" title="3.特殊符号转化"></a>3.特殊符号转化</h2><p>在 HTML 文件中，有两个字符需要特殊处理： <code>&lt;</code> 和 <code>&amp;</code>。</p>
+<p>&copy; 的写法如下：</p>
+<p>代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&amp;copy;</span><br></pre></td></tr></table></figure>
+<p>AT&amp;T markdown会将其转换成<br>代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AT&amp;T</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-区块元素"><a href="#4-区块元素" class="headerlink" title="4.区块元素"></a>4.区块元素</h2><h3 id="段落和换行"><a href="#段落和换行" class="headerlink" title="段落和换行"></a>段落和换行</h3><p>一个 Markdown 段落是由一个或多个连续的文本行组成，它的前后要有一个以上的空行。普通段落不该用空格或制表符来缩进。</p>
+<p>强制插入换行 <code>&lt;br/&gt;</code><br>先按入两个以上的空格然后回车。</p>
+<h3 id="4-1-标题"><a href="#4-1-标题" class="headerlink" title="4.1 标题"></a>4.1 标题</h3><h1 id="这是-H1"><a href="#这是-H1" class="headerlink" title="这是 H1"></a>这是 H1</h1><hr>
+<h2 id="这是-H2"><a href="#这是-H2" class="headerlink" title="这是 H2"></a>这是 H2</h2><p>===========</p>
+<h6 id="这是-H6"><a href="#这是-H6" class="headerlink" title="这是 H6"></a>这是 H6</h6><h1 id="这是-H1-1"><a href="#这是-H1-1" class="headerlink" title="这是 H1"></a>这是 H1</h1><hr>
+<h2 id="这是-H2-1"><a href="#这是-H2-1" class="headerlink" title="这是 H2"></a>这是 H2</h2><p>===========</p>
+<h6 id="这是-H6-1"><a href="#这是-H6-1" class="headerlink" title="这是 H6"></a>这是 H6</h6><p><strong>语法：</strong></p>
+<ul>
+<li><p>任何数量的 <code>=</code> 和 <code>-</code> 都可以有效果。</p>
+</li>
+<li><p>插入 1 到 6 个 <code>#</code> ，对应到标题 1 到 6 阶，可选尾加上 ，而行尾的 <code>#</code> 数量也不用和开头一样。</p>
+</li>
+</ul>
+<h3 id="4-2-区域引用"><a href="#4-2-区域引用" class="headerlink" title="4.2 区域引用"></a>4.2 区域引用</h3><blockquote>
+<h2 id="这是一个标题。"><a href="#这是一个标题。" class="headerlink" title="这是一个标题。"></a>这是一个标题。</h2></blockquote>
+<blockquote>
+</blockquote>
+<blockquote>
+<ol>
+<li>这是第一行列表项。</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="2">
+<li>这是第二行列表项。</li>
+</ol>
+</blockquote>
+<blockquote>
+<ul>
+<li>这个是列表展示</li>
+</ul>
+</blockquote>
+<blockquote>
+</blockquote>
+<blockquote>
+<p>给出一些例子代码：</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>这是第二行列表项。</p>
+</blockquote>
+</blockquote>
+<blockquote>
+</blockquote>
+<blockquote>
+<p>return shell_exec(“echo $input | $markdown_script”);</p>
+</blockquote>
+<p>代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&gt; ## 这是一个标题。</span><br><span class="line"></span><br><span class="line">&gt;</span><br><span class="line"></span><br><span class="line">&gt; 1. 这是第一行列表项。</span><br><span class="line"></span><br><span class="line">&gt; 2. 这是第二行列表项。</span><br><span class="line"></span><br><span class="line">&gt; * 这个是列表展示</span><br><span class="line"></span><br><span class="line">&gt;</span><br><span class="line"></span><br><span class="line">&gt; 给出一些例子代码：</span><br><span class="line"></span><br><span class="line">&gt; &gt; 这是第二行列表项。</span><br><span class="line"></span><br><span class="line">&gt;</span><br><span class="line"></span><br><span class="line">&gt; return shell_exec(&quot;echo $input | $markdown_script&quot;);</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>语法：</strong></p>
+<ul>
+<li><p>引用的区块内也可以使用其他的 Markdown 语法，包括标题、列表、代码区块，如果嵌套引用模块，则需要前后哥家一个回车换行.</p>
+</li>
+<li><p>Markdown 也允许你偷懒只在整个段落的第一行最前面加上 <code>&gt;</code>。</p>
+</li>
+</ul>
+<h3 id="4-3-列表"><a href="#4-3-列表" class="headerlink" title="4.3 列表"></a>4.3 列表</h3><p>Markdown 支持有序列表和无序列表。</p>
+<ul>
+<li><p>Red</p>
+</li>
+<li><p>Green</p>
+</li>
+<li><p>Blue</p>
+</li>
+</ul>
+<ul>
+<li><p>Red</p>
+</li>
+<li><p>Green</p>
+</li>
+<li><p>Blue</p>
+</li>
+</ul>
+<ul>
+<li><p>Red</p>
+</li>
+<li><p>Green</p>
+</li>
+<li><p>Blue</p>
+</li>
+</ul>
+<ol>
+<li><p>Bird</p>
+</li>
+<li><p>McHale</p>
+</li>
+</ol>
+<blockquote>
+<p>引用内容，列表中的引用，换行+加缩紧</p>
+</blockquote>
+<blockquote>
+<p>引用内容，列表中的引用，换行+加缩紧</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* Red</span><br><span class="line"></span><br><span class="line">* Green</span><br><span class="line"></span><br><span class="line">* Blue</span><br><span class="line"></span><br><span class="line">+ Red</span><br><span class="line"></span><br><span class="line">+ Green</span><br><span class="line"></span><br><span class="line">+ Blue</span><br><span class="line"></span><br><span class="line">- Red</span><br><span class="line"></span><br><span class="line">- Green</span><br><span class="line"></span><br><span class="line">- Blue</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">1. Bird</span><br><span class="line"></span><br><span class="line">2. McHale</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&gt; 引用内容，列表中的引用，换行+加缩紧</span><br><span class="line"></span><br><span class="line">&gt; 引用内容，列表中的引用，换行+加缩紧</span><br></pre></td></tr></table></figure>
+
+<p><strong>语法：</strong> 列表项目内放进引用，那 <code>&gt;</code> 就需要缩进。</p>
+<ol>
+<li>这是一个段落，此部分是可以进行缩进的，输入对应的空格或是制表符即可缩进</li>
+</ol>
+<p>这是一个缩进段落</p>
+<ol start="2">
+<li>这是一个段落，此部分是可以进行缩进的，输入对应的空格或是制表符即可缩进</li>
+</ol>
+<p>代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">1. 这是一个段落，此部分是可以进行缩进的，输入对应的空格或是制表符即可缩进</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">这是一个缩进段落</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">2. 这是一个段落，此部分是可以进行缩进的，输入对应的空格或是制表符即可缩进</span><br></pre></td></tr></table></figure>
+
+<p><strong>语法：</strong> 列表项目可以包含多个段落，每个项目下的段落都必须缩进 4 个空格或是 1 个制表符。</p>
+<p>是在行首出现数字-句点-空白，要避免这样的状况，你可以在句点前面加上反斜杠，避免序列号。</p>
+<p>1986. What a great season.</p>
+<p>代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">1986\. What a great season.</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="4-4-代码区块"><a href="#4-4-代码区块" class="headerlink" title="4.4 代码区块"></a>4.4 代码区块</h3><p>这是一个代码区块:</p>
+<p>tell application “Foo”</p>
+<p>beep</p>
+<p>end tell</p>
+<div class="footer">
+
+<p>&copy; 2004 Foo Corporation</p>
+</div>
+
+<p><strong>语法：</strong> Markdown 中建立代码区块，只要简单地缩进 4 个空格或是 1 个制表符就可以，一个代码区块会一直持续到没有缩进的那一行（或是文件结尾）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Here is an example of AppleScript:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">tell application &quot;Foo&quot;</span><br><span class="line"></span><br><span class="line">beep</span><br><span class="line"></span><br><span class="line">end tell</span><br><span class="line"></span><br><span class="line">&lt;div class&#x3D;&quot;footer&quot;&gt;</span><br><span class="line"></span><br><span class="line">&amp;copy; 2004 Foo Corporation</span><br><span class="line"></span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>代码模块也可以用（<code>```</code>）、(<code>~~~</code>)或单(<code>`</code>)，如果想输出三个（<code>```</code>）则用跟多的(<code>`</code>)引用起来。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">print(&#39;Hello world!&#39;)</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">print(&#39;Hello world!&#39;)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>print(‘Hello world!’)</p>
+<h3 id="4-5-分割线"><a href="#4-5-分割线" class="headerlink" title="4.5 分割线"></a>4.5 分割线</h3><hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* * *</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">***</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">*****</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- - -</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">---------------------------------------</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="4-6-区段元素"><a href="#4-6-区段元素" class="headerlink" title="4.6 区段元素"></a>4.6 区段元素</h3><h4 id="4-6-1-链接"><a href="#4-6-1-链接" class="headerlink" title="4.6.1 链接"></a>4.6.1 链接</h4><p>Markdown 支持两种形式的链接语法： 行内式和参考式两种形式。不管是哪一种，链接文字都是用 [方括号] 来标记。</p>
+<p><strong>行内式的链接</strong> 在方块括号后面紧接着圆括号并插入网址链接即可，如果你还想要加上链接的 title 文字，只要在网址后面，用双引号把 title 文字包起来即可，例如：</p>
+<p>这是一个 [an example](Example Domain “Title”) 行内链接.</p>
+<p>[This link](Example Domain) 这个是五Title的联机.</p>
+<p>可以使用相对路径<a href="/about/">About</a>.</p>
+<p>代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">这是一个 [an example](Example Domain &quot;Title&quot;) 行内链接.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[This link](Example Domain) 这个是五Title的联机.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">可以使用相对路径[About](&#x2F;about&#x2F;).</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>参考式的链接</strong> 是在链接文字的括号后面再接上另一个方括号，而在第二个方括号里面要填入用以辨识链接的标记。</p>
+<p>这是一个参考试链接 <a href="Markdown/img.jpg" title="Optional title attribute">an example</a>，参考试链接必须有对应的id值，否则无法连接.</p>
+<p><a href="Markdown/img.jpg" title="Optional title attribute">id</a>: Example Domain “Optional Title Here”</p>
+<p>代码如下：</p>
+<p><code>这是参考试链接 [an example][id] .</code></p>
+<p><code>[id]: Example Domain &quot;可选的title&quot;</code></p>
+<p><code>[id1]: &lt;Example Domain&gt; &quot;可选的title&quot;</code></p>
+<p><strong>语法：</strong></p>
+<ul>
+<li><p>方括号（前面可以选择性地加上至多三个空格来缩进），里面输入链接文字</p>
+</li>
+<li><p>接着一个冒号</p>
+</li>
+<li><p>接着一个以上的空格或制表符</p>
+</li>
+<li><p>接着链接的网址</p>
+</li>
+<li><p>选择性地接着 title 内容，可以用单引号、双引号或是括弧包着</p>
+</li>
+<li><p>链接网址也可以用尖括号包起来</p>
+</li>
+</ul>
+<p><strong>隐式链接标记</strong> 功能让你可以省略指定链接标记，这种情形下，链接标记会视为等同于链接文字，要用隐式链接标记只要在链接文字后面加上一个空的方括号，如果你要让 “Google” 链接到 google.com，你可以简化成：</p>
+<p><a href="http://google.com/" target="_blank" rel="noopener">Google</a></p>
+<p><code>[Google][]</code></p>
+<p>`<a href="http://google.com/" target="_blank" rel="noopener">Google</a>: <a href="http://google.com/&amp;#x60" target="_blank" rel="noopener">http://google.com/&amp;#x60</a>;</p>
+<p>下面是一个参考式链接的范例：</p>
+<p>在 <a href="http://google.com/" target="_blank" rel="noopener">Google</a> <a href="http://google.com/" target="_blank" rel="noopener" title="Google">1</a> 中搜索超过 [Yahoo] [2] 或 [MSN] [3].</p>
+<p>[2]: Yahoo Search - Web Search “Yahoo Search”</p>
+<p>[3]: 微软 Bing 搜索 - 国内版 “MSN Search”</p>
+<p><code>在 [Google] [1] 的搜索超过 [Yahoo] [2] 或 [MSN] [3].</code></p>
+<p><code>[1]: http://google.com/ &quot;Google&quot;</code></p>
+<p><code>[2]: Yahoo Search - Web Search &quot;Yahoo Search&quot;</code></p>
+<p><code>[2]: Yahoo Search - Web Search &quot;Yahoo Search&quot;</code></p>
+<p>如果改成用链接名称的方式写：</p>
+<p>在 <a href="http://google.com/" target="_blank" rel="noopener">Google</a> 中搜索超过 [Yahoo][] 或 [MSN][].</p>
+<p>[yahoo]: Yahoo Search - Web Search “Yahoo Search”</p>
+<p>[msn]: 微软 Bing 搜索 - 国内版 “MSN Search”</p>
+<p><code>在 [Google][] 中搜索超过 [Yahoo][] 或 [MSN][].</code></p>
+<p><code>[google]: http://google.com/ &quot;Google&quot;</code></p>
+<p><code>[yahoo]: Yahoo Search - Web Search &quot;Yahoo Search&quot;</code></p>
+<p><code>[msn]: 微软 Bing 搜索 - 国内版 &quot;MSN Search&quot;</code></p>
+<h3 id="4-7-强调"><a href="#4-7-强调" class="headerlink" title="4.7 强调"></a>4.7 强调</h3><ol>
+<li><p><em>单星号</em></p>
+</li>
+<li><p><em>单下滑线</em></p>
+</li>
+<li><p><strong>双星号</strong></p>
+</li>
+<li><p><strong>双下划线</strong></p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">1. *单星号*</span><br><span class="line"></span><br><span class="line">2. _单下滑线_</span><br><span class="line"></span><br><span class="line">3. **双星号**</span><br><span class="line"></span><br><span class="line">4. __双下划线__</span><br></pre></td></tr></table></figure>
+
+<p><strong>语法：</strong> <code>*</code> 和 <code>_</code> <strong>两边</strong>都有<strong>空白</strong>的话，它们就只会被当成普通的符号,文字前后直接插入普通的星号或底线，你可以用反斜线，如下：</p>
+<p>*this text is surrounded by literal asterisks*</p>
+<p>代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">\*this text is surrounded by literal asterisks\*</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="4-7-代码"><a href="#4-7-代码" class="headerlink" title="4.7 代码"></a>4.7 代码</h3><p>Use the <code>printf()</code> function.</p>
+<p><code>There is a literal backtick (`) here.</code></p>
+<p><strong>语法：</strong> 在代码区段内插入反引号，你可以用多个反引号来开启和结束代码区段。代码区段内，<code>&amp;</code>和<code>&lt;&gt;</code>都会被自动地转成 HTML 实体</p>
+<p>请不要在任何情况下使用 <code>&lt;blink&gt;</code> 标签.</p>
+<h3 id="4-8-图片"><a href="#4-8-图片" class="headerlink" title="4.8 图片"></a>4.8 图片</h3><p><img src="Markdown/img.jpg" alt="Alt text"></p>
+<p><img src="Markdown/img.jpg" alt="Alt text" title="Optional title"></p>
+<p><img src="Markdown/img.jpg" alt="Alt text" title="Optional title attribute"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">![Alt text](&#x2F;Markdwon&#x2F;img.jpg)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">![Alt text](&#x2F;Markdwon&#x2F;img.jpg &quot;Optional title&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">![Alt text][id]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#96;[id]: url&#x2F;to&#x2F;image &quot;Optional title attribute&quot;&#96;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li><p>一个惊叹号 !</p>
+</li>
+<li><p>接着一个方括号，里面放上图片的替代文字</p>
+</li>
+<li><p>接着一个普通括号，里面放上图片的网址，最后还可以用引号包住并加上 选择性的 ‘title’ 文字。</p>
+</li>
+</ul>
+<h3 id="4-9-自动链接"><a href="#4-9-自动链接" class="headerlink" title="4.9 自动链接"></a>4.9 自动链接</h3><Example Domain>
+
+
+
+<p><a href="mailto:&#x61;&#x64;&#100;&#x72;&#x65;&#115;&#115;&#64;&#101;&#x78;&#97;&#x6d;&#x70;&#x6c;&#x65;&#46;&#99;&#111;&#x6d;">&#x61;&#x64;&#100;&#x72;&#x65;&#115;&#115;&#64;&#101;&#x78;&#97;&#x6d;&#x70;&#x6c;&#x65;&#46;&#99;&#111;&#x6d;</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;Example Domain&gt;</span><br><span class="line"></span><br><span class="line">&lt;address@example.com&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="4-10-反斜杠转译字符"><a href="#4-10-反斜杠转译字符" class="headerlink" title="4.10 反斜杠转译字符"></a>4.10 反斜杠转译字符</h3><p>利用反斜杠来插入一些在语法中有其它意义的符号.</p>
+<p>Markdown 支持以下这些符号前面加上反斜杠来帮助插入普通的符号：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">\ 反斜线</span><br><span class="line"></span><br><span class="line">&#96; 反引号</span><br><span class="line"></span><br><span class="line">* 星号</span><br><span class="line"></span><br><span class="line">_ 底线</span><br><span class="line"></span><br><span class="line">&#123;&#125; 花括号</span><br><span class="line"></span><br><span class="line">[] 方括号</span><br><span class="line"></span><br><span class="line">() 括弧</span><br><span class="line"></span><br><span class="line"># 井字号</span><br><span class="line"></span><br><span class="line">+ 加号</span><br><span class="line"></span><br><span class="line">- 减号</span><br><span class="line"></span><br><span class="line">. 英文句点</span><br><span class="line"></span><br><span class="line">! 惊叹号</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="5-高级使用实例"><a href="#5-高级使用实例" class="headerlink" title="5. 高级使用实例"></a>5. 高级使用实例</h2><h3 id="5-1-链接方式，可以在其中加粗："><a href="#5-1-链接方式，可以在其中加粗：" class="headerlink" title="5.1 链接方式，可以在其中加粗："></a>5.1 链接方式，可以在其中加粗：</h3><p>You can specify extra HTML rendering options through the <a href="#rendering-pane"><strong>Rendering</strong> preference pane</a>.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">You can specify extra HTML rendering options through the [**Rendering** preference pane](#rendering-pane).</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="5-2-列表缩进（主要针对Macdown工具）"><a href="#5-2-列表缩进（主要针对Macdown工具）" class="headerlink" title="5.2 列表缩进（主要针对Macdown工具）"></a>5.2 列表缩进（主要针对Macdown工具）</h3><ul>
+<li><p>列表必须后边紧跟一个空格</p>
+</li>
+<li><p>无序列表以 <code>*</code></p>
+</li>
+</ul>
+<ul>
+<li><code>-</code>、<code>+</code> 也可以用</li>
+</ul>
+<ul>
+<li>嵌套进行缩紧</li>
+</ul>
+<ol>
+<li><p>支持顺序编号</p>
+</li>
+<li><p>起始于数字后跟点并在点后加入空格 like <code>1.</code></p>
+</li>
+<li><p>可以不用顺序, 自动顺序编号</p>
+</li>
+<li><p>你可能想开始宇<code>1.</code> 使其自动编号</p>
+</li>
+</ol>
+<p>代码如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 列表必须后边紧跟一个空格</span><br><span class="line"></span><br><span class="line">* 无序列表以 &#96;*&#96;</span><br><span class="line"></span><br><span class="line">- &#96;-&#96;、&#96;+&#96; 也可以用</span><br><span class="line"></span><br><span class="line">* 嵌套进行缩紧</span><br><span class="line"></span><br><span class="line">1. 支持顺序编号</span><br><span class="line"></span><br><span class="line">2. 起始于数字后跟点并在点后加入空格 like &#96;1. &#96;</span><br><span class="line"></span><br><span class="line">42. 可以不用顺序, 自动顺序编号</span><br><span class="line"></span><br><span class="line">1. 你可能想开始宇&#96;1.&#96; 使其自动编号</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="引用及引用中引用"><a href="#引用及引用中引用" class="headerlink" title="引用及引用中引用"></a>引用及引用中引用</h3><blockquote>
+<p>尖括号 <code>&gt;</code> 被用做引用，一样中换行，后变跟两个以上空格.</p>
+</blockquote>
+<p>语法上不是每个都需要一个 <code>&gt;</code></p>
+<p>段落之间没有空行，否则会出现在换行引用.</p>
+<blockquote>
+<p>引用中的引用，嵌套引用.</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>嵌套引用这个是.</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>多嵌套医用</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+</blockquote>
+<blockquote>
+<p>多嵌套引用后续</p>
+</blockquote>
+<blockquote>
+</blockquote>
+<blockquote>
+<ul>
+<li>列表</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li><a href="#fenced-code-block">嵌套联机</a>，链接引用号必须有，否则会出现不能连接及显示问题</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>等等.</li>
+</ul>
+</blockquote>
+<p>代码如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&gt; 尖括号 &#96;&gt;&#96; 被用做引用，一样中换行，后变跟两个以上空格.</span><br><span class="line"></span><br><span class="line">语法上不是每个都需要一个 &#96;&gt;&#96;</span><br><span class="line"></span><br><span class="line">段落之间没有空行，否则会出现在换行引用.</span><br><span class="line"></span><br><span class="line">&gt; 引用中的引用，嵌套引用.</span><br><span class="line"></span><br><span class="line">&gt; &gt; 嵌套引用这个是.</span><br><span class="line"></span><br><span class="line">&gt; &gt; &gt; 多嵌套医用</span><br><span class="line"></span><br><span class="line">&gt;</span><br><span class="line"></span><br><span class="line">&gt; 多嵌套引用后续</span><br><span class="line"></span><br><span class="line">&gt;</span><br><span class="line"></span><br><span class="line">&gt; * 列表</span><br><span class="line"></span><br><span class="line">&gt; * [嵌套联机](#fenced-code-block)，链接引用号必须有，否则会出现不能连接及显示问题</span><br><span class="line"></span><br><span class="line">&gt; * 等等.</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="嵌套代码"><a href="#嵌套代码" class="headerlink" title="嵌套代码"></a>嵌套代码</h3><p><code>内嵌代码</code> 使用来表示: <code>`内嵌代码`</code></p>
+<p>如果你想显示单个<code>代码 `反引号`</code> 内容, 使用两个反引号，并且用空格隔开<code>`</code>，如果想想显示两个，则用三个<code>`</code>，<code>``代码块 `反引号` ``</code>，以此类推。</p>
+<h3 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h3><p>以下表格:</p>
+<p>First Header | Second Header</p>
+<p>————- | ————-</p>
+<p>Content Cell | Content Cell</p>
+<p>Content Cell | Content Cell</p>
+<p>You can align cell contents with syntax like this:</p>
+<p>| Left Aligned | Center Aligned | Right Aligned |</p>
+<p>|:————- |:—————:| ————-:|</p>
+<p>| col 3 is | some wordy text | $1600 |</p>
+<p>| col 2 is | centered | $12 |</p>
+<p>| zebra stripes | are neat | $1 |</p>
+<p>为了美观短竖线 (<code>|</code>) 在开头和结尾加上, 费必须. 空格无影响. 使用 <code>:</code> 表示对齐方式，中间对齐使用两个，左对齐在左端，右对齐在右侧.</p>
+<h3 id="内嵌代码高亮显示"><a href="#内嵌代码高亮显示" class="headerlink" title="内嵌代码高亮显示"></a>内嵌代码高亮显示</h3><p>只有在设置-rendering-<strong><em>Enable highlighting in code blocks</em></strong>开启时才会有内嵌代码高亮显示（macdown支持，[查看地址](MacDown: The open source Markdown editor for macOS) ），可以在开头写上<code>~~~python</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> urllib3</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> ssl</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> pip._vendor <span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">ssl._create_default_https_context = ssl._create_unverified_context</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getList</span><span class="params">()</span>:</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="表格内的格式"><a href="#表格内的格式" class="headerlink" title="表格内的格式"></a>表格内的格式</h3><p>Option name | Markup | Result if enabled |</p>
+<p>——————–|——————|———————–|</p>
+<p>Intra-word emphasis | So A*maz*ing | So A<em>maz</em>ing |</p>
+<p>Strikethrough | ~<del>Much wow\</del> | <del>Much wow</del> |</p>
+<p>Underline [^under] | _So doge_ | <u>So doge</u> |</p>
+<p>Quote [^quote] | &quot;Such editor&quot; | <q>Such editor</q> |</p>
+<p>Highlight | ==So good== | <mark>So good</mark> |</p>
+<p>Superscript | hoge^(fuga) | hoge<sup>fuga</sup> |</p>
+<p>Autolink | <a href="http://t.co" target="_blank" rel="noopener">http://t.co</a> | <a href="http://t.co" target="_blank" rel="noopener">http://t.co</a> |</p>
+<p>Footnotes | [^4] and [^4]: | [^4] and footnote 4 |</p>
+<p>[^4]: 角注可以使用数字<code>[^4]</code>. 也可以使用 <code>[^footy note4]</code>和 <code>[^footy note4]:</code> 此处带<code>:</code>号.无论如何标示都会在角注中以数字序列排列，无论备注在何处都会在底部显示. 不必特意编号，编辑器会自动为你按照角注顺序编号，并在底部显示角注可以放到引用地方，但是最后会显示在最后角注。</p>
+<h3 id="TeX-like-语法，数学计算式的表达"><a href="#TeX-like-语法，数学计算式的表达" class="headerlink" title="TeX-like 语法，数学计算式的表达"></a>TeX-like 语法，数学计算式的表达</h3><p>使用TeX-like数学语法, <a href="需要互联网支持。">^math</a> 可以使用: \( 1 + 1 \) 或是 in MathML: <math><mn>1</mn><mo>+</mo><mn>1</mn></math>, and block math:</p>
+<p>\[</p>
+<p>A^T_S = B</p>
+<p>\]</p>
+<p>或是 (in MathML)</p>
+<math display="block">
+
+<p><msubsup><mi>A</mi> <mi>S</mi> <mi>T</mi></msubsup></p>
+<p><mo>=</mo></p>
+<p><mi>B</mi></p>
+</math>
+
+
+
+<h3 id="列表显示支持"><a href="#列表显示支持" class="headerlink" title="列表显示支持"></a>列表显示支持</h3><ol>
+<li><input checked="" disabled="" type="checkbox"> 设置中选择 task list syntax，才会生效</li>
+</ol>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> <p>支持嵌套</p>
+</li>
+<li><input checked="" disabled="" type="checkbox"> <p>支持顺序和非顺序方式</p>
+</li>
+</ul>
+<ol start="2">
+<li><input disabled="" type="checkbox"> 不支持香html一样的checkbox选择</li>
+</ol>
+<p>[^under]: 如果 <strong>Underline</strong> 被禁用 <code>_this_</code> 将以 <em>emphasized</em> 加粗强调显示，不显示下滑线.</p>
+<p>[^quote]: <strong>引号</strong> 替换 <code>&quot;</code> 符号使用 html <code>&lt;q&gt;</code> 标签. <strong>Quote</strong> 和 <strong>Smartypants</strong> 两者是冲突的. 如果两着都被弃用, <strong>引号</strong> 优先. 注意 <strong>quote</strong>引号与<em>blockquote</em>有区别的, 这也是标准的Markdown一部分.</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/7/2/markdown-case/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="[数据结构]-Avltree" class="article article-type-[数据结构]  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/7/2/Avltree/">Avltree</a>
+    </h1>
+  
+
+        
+        <a href="/2020/7/2/Avltree/" class="archive-article-date">
+  	<time datetime="2020-07-02T08:42:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><ul>
+<li>平衡树是基于二叉查找树的一种数据结构，添加了更加严格的管理制度用以保证树的高度，即<strong>每一个节点的左右子树深度之差</strong>不超过1。</li>
+<li>但是条件可能过于严格，导致插入和删除的操作会导致数据大量的移动。  </li>
+</ul>
+<h2 id="结构实现"><a href="#结构实现" class="headerlink" title="结构实现"></a>结构实现</h2><ul>
+<li>储存方式依旧是二叉树储存，对于每个节点需要添加一个关键字depth</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/7/2/Avltree/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -165,12 +699,12 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/07/01/hello-world/">Hello World</a>
+      <a class="article-title" href="/2020/7/1/hello-world/">Hello World</a>
     </h1>
   
 
         
-        <a href="/2020/07/01/hello-world/" class="archive-article-date">
+        <a href="/2020/7/1/hello-world/" class="archive-article-date">
   	<time datetime="2020-07-01T08:21:05.096Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-01</time>
 </a>
         
@@ -203,7 +737,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/07/01/hello-world/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/7/1/hello-world/">展开全文 >></a>
         </p>
       
 
