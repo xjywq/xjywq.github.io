@@ -215,7 +215,7 @@ end tell</code></pre><div class="footer">
 </ul>
 <h3 id="4-9-自动链接"><a href="#4-9-自动链接" class="headerlink" title="4.9 自动链接"></a>4.9 自动链接</h3><Example Domain>
 
-<p><a href="mailto:&#97;&#100;&#x64;&#114;&#101;&#115;&#x73;&#64;&#x65;&#x78;&#97;&#x6d;&#x70;&#x6c;&#x65;&#x2e;&#99;&#111;&#x6d;">&#97;&#100;&#x64;&#114;&#101;&#115;&#x73;&#64;&#x65;&#x78;&#97;&#x6d;&#x70;&#x6c;&#x65;&#x2e;&#99;&#111;&#x6d;</a></p>
+<p><a href="mailto:&#97;&#100;&#100;&#x72;&#x65;&#115;&#x73;&#64;&#x65;&#x78;&#97;&#109;&#112;&#x6c;&#101;&#46;&#x63;&#x6f;&#109;">&#97;&#100;&#100;&#x72;&#x65;&#115;&#x73;&#64;&#x65;&#x78;&#97;&#109;&#112;&#x6c;&#101;&#46;&#x63;&#x6f;&#109;</a></p>
 <h3 id="4-10-反斜杠转译字符"><a href="#4-10-反斜杠转译字符" class="headerlink" title="4.10 反斜杠转译字符"></a>4.10 反斜杠转译字符</h3><p>利用反斜杠来插入一些在语法中有其它意义的符号.</p>
 <p>Markdown 支持以下这些符号前面加上反斜杠来帮助插入普通的符号：</p>
 <h2 id="5-高级使用实例"><a href="#5-高级使用实例" class="headerlink" title="5. 高级使用实例"></a>5. 高级使用实例</h2><h3 id="5-1-链接方式，可以在其中加粗："><a href="#5-1-链接方式，可以在其中加粗：" class="headerlink" title="5.1 链接方式，可以在其中加粗："></a>5.1 链接方式，可以在其中加粗：</h3><p>You can specify extra HTML rendering options through the <a href="#rendering-pane"><strong>Rendering</strong> preference pane</a>.</p>
