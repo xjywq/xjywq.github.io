@@ -74,7 +74,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">1k</span>
+            <span class="post-count">997</span>
         </span>
     </span>
 
@@ -188,20 +188,20 @@
 <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">百度</span>][<span class="symbol">baidu</span>]</span><br><span class="line"></span><br><span class="line">[<span class="symbol">baidu</span>]:<span class="link">www.baidu.com "百度搜索"</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="11-图片"><a href="#11-图片" class="headerlink" title="11. 图片"></a>11. 图片</h2><ul>
-<li>使用链接的格式, 但是在开头加上<code>!</code>, 链接地址使用本地路径(支持绝对路径与相对路径).</li>
+<li>使用链接的格式, 但是在开头加上<code>!</code>, 链接地址使用本地路径(支持绝对路径与相对路径), 但是在hexo上无法正确显示(图片无法加载).</li>
 </ul>
-<p>![麻衣学姐](/markdown-case/麻衣学姐.jpg =400x300 “这是我的老婆”)</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![<span class="string">麻衣学姐</span>](<span class="link">/markdown-case/麻衣学姐.jpg =400x300 "这是我的老婆"</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![<span class="string">麻衣学姐</span>](<span class="link">/markdown-case/麻衣学姐.jpg</span>)</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>使用在线图床, 同上</li>
 </ul>
-<p>![麻衣学姐](<a href="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=838706023,3015528324&amp;fm=26&amp;gp=0.jpg" target="_blank" rel="noopener">https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=838706023,3015528324&amp;fm=26&amp;gp=0.jpg</a> =400x300 “这是我的老婆”)</p>
+<p><img src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=838706023,3015528324&fm=26&gp=0.jpg" alt="麻衣学姐" title="这是我的老婆"></p>
 <ul>
 <li>使用HTML语法</li>
 </ul>
-<img src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=838706023,3015528324&fm=26&gp=0.jpg" width="20%" text = "这是我老婆">
- 
+<img src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=838706023,3015528324&fm=26&gp=0.jpg" alt = "麻衣学姐">
+
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=838706023,3015528324&amp;fm=26&amp;gp=0.jpg"</span> <span class="attr">alt</span> = <span class="string">"麻衣学姐"</span>&gt;</span></span></span><br></pre></td></tr></table></figure> 
       <!-- reward -->
       
     </div>
