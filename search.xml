@@ -151,6 +151,7 @@
 <h2 id="11-图片"><a href="#11-图片" class="headerlink" title="11. 图片"></a>11. 图片</h2><ul>
 <li>使用链接的格式, 但是在开头加上<code>!</code>, 链接地址使用本地路径(支持绝对路径与相对路径), 但是在hexo上无法正确显示(图片无法加载).</li>
 </ul>
+<p><img src="/picture/markdown-case/%E9%BA%BB%E8%A1%A3%E5%AD%A6%E5%A7%90.jpg" alt="麻衣学姐"></p>
 <figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">![<span class="string">麻衣学姐</span>](<span class="link">/markdown-case/麻衣学姐.jpg</span>)</span><br></pre></td></tr></table></figure>
 
 <ul>
