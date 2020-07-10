@@ -74,7 +74,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">1k</span>
+            <span class="post-count">1.3k</span>
         </span>
     </span>
 
@@ -83,7 +83,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">3 min</span>
+            <span class="post-count">4 min</span>
         </span>
     </span>
 </div>
@@ -196,13 +196,35 @@
 <ul>
 <li>使用在线图床, 同上</li>
 </ul>
-<p><img src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=838706023,3015528324&fm=26&gp=0.jpg" alt="麻衣学姐" title="这是我的老婆"></p>
+<p><img src="https://raw.githubusercontent.com/xjywq/picgo/master/%E9%BA%BB%E8%A1%A3%E5%AD%A6%E5%A7%90.jpg" alt="麻衣学姐" title="这是我的老婆"></p>
 <ul>
 <li>使用HTML语法</li>
 </ul>
-<img src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=838706023,3015528324&fm=26&gp=0.jpg" alt = "麻衣学姐">
+<img src="https://raw.githubusercontent.com/xjywq/picgo/master/%E9%BA%BB%E8%A1%A3%E5%AD%A6%E5%A7%90.jpg" alt = "麻衣学姐">
 
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=838706023,3015528324&amp;fm=26&amp;gp=0.jpg"</span> <span class="attr">alt</span> = <span class="string">"麻衣学姐"</span>&gt;</span></span></span><br></pre></td></tr></table></figure> 
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"hhttps://raw.githubusercontent.com/xjywq/picgo/master/%E9%BA%BB%E8%A1%A3%E5%AD%A6%E5%A7%90.jpg"</span> <span class="attr">alt</span> = <span class="string">"麻衣学姐"</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<h2 id="13-公式"><a href="#13-公式" class="headerlink" title="13. 公式"></a>13. 公式</h2><ul>
+<li>markdown可以通过简单的语法插入公式, 首先是通过<code>$</code>符号, 如$\frac{1+2}{2}=1.5$, 或者另一起一行作为独立公式$$\sum_{i=0}^n{\frac 1 n}=\infty$$</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">行内公式</span><br><span class="line">$\frac&#123;1+2&#125;&#123;2&#125;=1.5$</span><br><span class="line"></span><br><span class="line">单独公式</span><br><span class="line">$$\sum_&#123;i=0&#125;^n&#123;\frac 1 n&#125;=\infty$$</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>或者使用<a href="https://www.codecogs.com/eqnedit.php" target="_blank" rel="noopener">在线公式编辑器</a>, 可以复制得到的图像或者借助于下方的HTML方法</p>
+</li>
+<li><p>H也可以直接手动使用HTML方法, 借助<a href="http://chart.googleapis.com/chart" target="_blank" rel="noopener">google chart</a>或者其他</p>
+</li>
+</ul>
+<img src="http://chart.googleapis.com/chart?cht=tx&chl= \sum_{i=0}^n{\frac 1 n}=\infty" style="border:none;">
+
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">谷歌服务器</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"http://chart.googleapis.com/chart?cht=tx&amp;chl= \sum_&#123;i=0&#125;^n&#123;\frac 1 n&#125;=\infty"</span> <span class="attr">style</span>=<span class="string">"border:none;"</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>在这里贴一下一位大佬的<a href="https://www.luogu.com.cn/blog/IowaBattleship/latex-gong-shi-tai-quan" target="_blank" rel="noopener">LaTeX数学公式大全</a>, 很好用</p>
+<h2 id="14-mermaid使用"><a href="#14-mermaid使用" class="headerlink" title="14. mermaid使用"></a>14. mermaid使用</h2><ul>
+<li>部分markdown编辑器支持mermaid的流程图渲染等等, 可惜hexo并不支持这点(暂时没有装插件的打算, 可能以后会考虑)</li>
+<li>可以看看CSDN上大佬发的mermaid<a href="https://blog.csdn.net/weixin_33901641/article/details/90303528?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-4.nonecase&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-4.nonecase" target="_blank" rel="noopener">实用教程</a></li>
+</ul>
+ 
       <!-- reward -->
       
     </div>
