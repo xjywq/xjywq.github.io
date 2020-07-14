@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">405</span>
+            <span class="post-count">524</span>
         </span>
     </span>
 
@@ -130,7 +130,8 @@
 <h3 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h3><ul>
 <li>对于一般的插入,我们只需要从下至上修改节点的深度即可</li>
 <li>如果遇到节点失衡,一般来说只会有两种情况<ol>
-<li>失衡节点左(右)子树深度大于右(左)子树深度<br>此时我们只需做一次旋转,将失衡节点下放,将深度大的子节点上移即可<br>如图:</li>
+<li>危机节点左子树深度大于右子树深度, 且危机节点的右子树为空, 此时我们只需做一次旋转, 将危机节点下放, 将深度大的子节点上移即可, 如图:<br><img src="Avltree%5Cavltree1.png" alt="avltree1"><br>如果危机节点右子树大于左子树深度, 此时与第一种相同, 方向相反即可.<br>旋转结果如下:<br><img src="Avltree%5Cavltree2.png" alt="avltree2"></li>
+<li>插入的节点时, 危机节点的右节点不为空, 如图:<br><img src="Avltree%5Cavltree3.png" alt="avltree3"><br>此时需要将危机节点左节点的右子树变成右节点的左子树, 同样是做一次旋转使得A下放, B上升, 注意D节点的位置<br>旋转结果如下:<br><img src="Avltree%5Cavltree4.png" alt="avltree4"></li>
 </ol>
 </li>
 </ul>
