@@ -252,7 +252,8 @@
   <entry>
     <title>k近邻法</title>
     <url>/2020/9/9/k%E8%BF%91%E9%82%BB%E6%B3%95/</url>
-    <content><![CDATA[]]></content>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>一种基本分类及回归方法. 我们仅仅考虑分类问题中的k近邻法.</p>
+<a id="more"></a>]]></content>
       <categories>
         <category>深度学习</category>
       </categories>
