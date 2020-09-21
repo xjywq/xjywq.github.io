@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-Hans">
+
+
+<head>
+  <meta charset="utf-8" />
+   
+  <meta name="keywords" content="算法分析, 数据结构, 游戏制作" />
+   
+  <meta name="description" content="My personal blog -- for study and fun" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    KD-Tree |  XJYWQ
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="[数据结构]-KD-Tree"
+  class="article article-type-[数据结构]"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  KD-Tree
+</h1>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/9/21/KD-Tree/" class="article-date">
+  <time datetime="2020-09-21T05:02:00.000Z" itemprop="datePublished">2020-09-21</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/data-structure/">data structure</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">1.9k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">8 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>KD 树是一种对 k 维空间中实例点的划分进行储存以便对其进行快速检索的树形数据结构, KD 树为二叉树, 每个分支表示对 k 维空间的一个划分(partition). 构造 KD 树相当于不断用垂直于坐标轴的超平面将 k 维空间划分, 构成一系列的 k 维超矩形区域, KD 树的每一个叶子节点对应一个 k 维的超矩形区域.</p>
+<p>本文针对 python, 介绍了 python 构建和使用 KD 树的方法和实现.</p>
+<a id="more"></a>
+
+<h2 id="构造"><a href="#构造" class="headerlink" title="构造"></a>构造</h2><ul>
+<li>构造根节点, 使根节点对应于 k 维空间中包含所有实例点的超矩形区域, 通过下面的递归方法, 不断对 k 维空间进行切分.</li>
+<li>在超矩形上选一个坐标轴和在此坐标轴上的一个切分点, 确定一个超平面, 这个超平面通过选定的切分点并垂直于选定的坐标轴. 这时, 实例被分到两个子区域.</li>
+<li>这个过程一直持续到子区域内没有实例时终止, 在过程中, 将实例保存在相应的节点上.</li>
+<li>通常, 选择的训练实例点在选定坐标轴上的中位数为切分点, 这样会得到平衡的 KD 树, 但值得注意的是, 平衡的 KD 树搜索效率未必是最优的.</li>
+</ul>
+<h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><p>为了方便起见, 我们使用 python 处理数据, 当然 python 中也有很多模块可以直接使用, 比如<code>kd</code>, <code>scipy</code>等等. 当然此处我们选择使用源码实现.</p>
+<ul>
+<li>首先是对树进行构建, 为此我们需要定义树的节点, 如下:</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">KD_node</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, elt=None, split=None, LL=None, RR=None)</span>:</span></span><br><span class="line">        <span class="string">'''</span></span><br><span class="line"><span class="string">        @param: elt Data: 数据点</span></span><br><span class="line"><span class="string">        @param: split number: 划分维度</span></span><br><span class="line"><span class="string">        @param: LL, RR KD_node: 节点的左儿子跟右儿子</span></span><br><span class="line"><span class="string">        '''</span></span><br><span class="line">        self.elt = elt</span><br><span class="line">        self.split = split</span><br><span class="line">        self.left = LL</span><br><span class="line">        self.right = RR</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>然后是对树的生成, 我们选择计算每个维度的方差, 选择其中最大值, 这样虽然在建立 KD 树时会增加生成时间, 但是在搜索时可以节省时间^[另有方法是取一个 Hash 函数, 这样虽然建立时节省了大量时间, 却不能对搜索进行优化, 两种方法各有优势, 可自行选择], 使用递归计算分类的维度后对没个点分类切片^[值得注意的是为了节省空间, 经过构建后 Datalist 会被以一定规则排序], 使用的距离规则为欧拉距离, 即取平方加和再开根号.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">createKDTree</span><span class="params">(root, data_list)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    @param: root KD_node: 当前树的根节点</span></span><br><span class="line"><span class="string">    @param: data_list list: 数据点的集合(无序)</span></span><br><span class="line"><span class="string">    @return: root KD_node: 构造的KDTree的树根</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    LEN = len(data_list)</span><br><span class="line">    <span class="keyword">if</span> LEN == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    <span class="comment"># 数据点的维度</span></span><br><span class="line">    dimension = len(data_list[<span class="number">0</span>])</span><br><span class="line">    <span class="comment"># 方差</span></span><br><span class="line">    max_var = <span class="number">0</span></span><br><span class="line">    <span class="comment"># 最后选择的划分域</span></span><br><span class="line">    split = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(dimension):</span><br><span class="line">        ll = []</span><br><span class="line">        <span class="keyword">for</span> t <span class="keyword">in</span> data_list:</span><br><span class="line">            ll.append(t[i])</span><br><span class="line">        var = computeVariance(ll)</span><br><span class="line">        <span class="keyword">if</span> var &gt; max_var:</span><br><span class="line">            max_var = var</span><br><span class="line">            split = i</span><br><span class="line">    <span class="comment"># 根据划分域的数据对数据点进行排序</span></span><br><span class="line">    data_list.sort(key=<span class="keyword">lambda</span> x: x[split])</span><br><span class="line">    <span class="comment"># 选择下标为len // 2的点作为分割点</span></span><br><span class="line">    elt = data_list[LEN // <span class="number">2</span>]</span><br><span class="line">    root = KD_node(elt, split)</span><br><span class="line">    root.left = createKDTree(root.left, data_list[<span class="number">0</span>:(LEN // <span class="number">2</span>)])</span><br><span class="line">    root.right = createKDTree(root.right, data_list[(LEN // <span class="number">2</span> + <span class="number">1</span>):LEN])</span><br><span class="line">    <span class="keyword">return</span> root</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">computeVariance</span><span class="params">(arrayList)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    @param: arrayList list: 存放的数据点</span></span><br><span class="line"><span class="string">    @return: variance number: 返回数据点的方差</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    <span class="keyword">for</span> ele <span class="keyword">in</span> arrayList:</span><br><span class="line">        ele = float(ele)</span><br><span class="line">    LEN = float(len(arrayList))</span><br><span class="line">    array = np.array(arrayList)</span><br><span class="line">    sum1 = array.sum()</span><br><span class="line">    array2 = array * array</span><br><span class="line">    sum2 = array2.sum()</span><br><span class="line">    mean = sum1 / LEN</span><br><span class="line">    <span class="comment"># D[X] = E[x^2] - (E[x])^2 使用欧拉距离</span></span><br><span class="line">    variance = sum2 / LEN - mean**<span class="number">2</span></span><br><span class="line">    <span class="keyword">return</span> variance</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>之后便是搜索的定义和使用, 我们定义具体的距离计算公式, 并通过栈寻找最邻近的点, 返回点与其距离.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">findNN</span><span class="params">(root, query)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    @param: root KD_node: KDTree的树根</span></span><br><span class="line"><span class="string">    @param: query Data: 查询点</span></span><br><span class="line"><span class="string">    @return: NN,mindist KD_node,number: 返回距离data最近的点NN，同时返回最短距离min_dist</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    <span class="comment"># 初始化为root的节点</span></span><br><span class="line">    NN = root.elt</span><br><span class="line">    min_dist = computeDist(query, NN)</span><br><span class="line">    nodeList = []</span><br><span class="line">    temp_root = root</span><br><span class="line">    <span class="comment"># 二分查找建立路径</span></span><br><span class="line">    <span class="keyword">while</span> temp_root:</span><br><span class="line">        nodeList.append(temp_root)</span><br><span class="line">        dd = computeDist(query, temp_root.elt)</span><br><span class="line">        <span class="keyword">if</span> min_dist &gt; dd:</span><br><span class="line">            NN = temp_root.elt</span><br><span class="line">            min_dist = dd</span><br><span class="line">        <span class="comment"># 当前节点的划分域</span></span><br><span class="line">        ss = temp_root.split</span><br><span class="line">        <span class="keyword">if</span> query[ss] &lt;= temp_root.elt[ss]:</span><br><span class="line">            temp_root = temp_root.left</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            temp_root = temp_root.right</span><br><span class="line">    <span class="comment"># 回溯查找</span></span><br><span class="line">    <span class="keyword">while</span> nodeList:</span><br><span class="line">        <span class="comment"># 使用list模拟栈，后进先出</span></span><br><span class="line">        back_elt = nodeList.pop()</span><br><span class="line">        ss = back_elt.split</span><br><span class="line">        <span class="comment"># 判断是否需要进入父亲节点的子空间进行搜索</span></span><br><span class="line">        <span class="keyword">if</span> abs(query[ss] - back_elt.elt[ss]) &lt; min_dist:</span><br><span class="line">            <span class="keyword">if</span> query[ss] &lt;= back_elt.elt[ss]:</span><br><span class="line">                temp_root = back_elt.right</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                temp_root = back_elt.left</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> temp_root:</span><br><span class="line">                nodeList.append(temp_root)</span><br><span class="line">                curDist = computeDist(query, temp_root.elt)</span><br><span class="line">                <span class="keyword">if</span> min_dist &gt; curDist:</span><br><span class="line">                    min_dist = curDist</span><br><span class="line">                    NN = temp_root.elt</span><br><span class="line">    <span class="keyword">return</span> NN, min_dist</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">computeDist</span><span class="params">(pt1, pt2)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    @function: 计算两个数据点的距离</span></span><br><span class="line"><span class="string">    @param: pt1, pt2 point: 输入的数据点</span></span><br><span class="line"><span class="string">    @return: sum number: pt1和pt2之间的距离</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    sum = <span class="number">0.0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(pt1)):</span><br><span class="line">        sum = sum + (pt1[i] - pt2[i]) * (pt1[i] - pt2[i])</span><br><span class="line">    <span class="keyword">return</span> math.sqrt(sum)</span><br></pre></td></tr></table></figure>
+
+<h2 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h2><p>至此, KD 树就搭建完毕了, 下面是一份简单的测试源码和完整代码, 不过目前这个 KD 树只支持寻找最近的节点, 如果有兴趣可以自行修改 findNN 函数, 使其返回包含最近的 k 个节点的列表.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- encoding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">@Description: KD-Tree:</span></span><br><span class="line"><span class="string">@Date     :2020/09/22 00:24:36</span></span><br><span class="line"><span class="string">@Author      :xjywq</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">KD_node</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, elt=None, split=None, LL=None, RR=None)</span>:</span></span><br><span class="line">        <span class="string">'''</span></span><br><span class="line"><span class="string">        @param: elt Data: 数据点</span></span><br><span class="line"><span class="string">        @param: split number: 划分维度</span></span><br><span class="line"><span class="string">        @param: LL, RR KD_node: 节点的左儿子跟右儿子</span></span><br><span class="line"><span class="string">        '''</span></span><br><span class="line">        self.elt = elt</span><br><span class="line">        self.split = split</span><br><span class="line">        self.left = LL</span><br><span class="line">        self.right = RR</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">createKDTree</span><span class="params">(root, data_list)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    @param: root KD_node: 当前树的根节点</span></span><br><span class="line"><span class="string">    @param: data_list list: 数据点的集合(无序)</span></span><br><span class="line"><span class="string">    @return: root KD_node: 构造的KDTree的树根</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    LEN = len(data_list)</span><br><span class="line">    <span class="keyword">if</span> LEN == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    <span class="comment"># 数据点的维度</span></span><br><span class="line">    dimension = len(data_list[<span class="number">0</span>])</span><br><span class="line">    <span class="comment"># 方差</span></span><br><span class="line">    max_var = <span class="number">0</span></span><br><span class="line">    <span class="comment"># 最后选择的划分域</span></span><br><span class="line">    split = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(dimension):</span><br><span class="line">        ll = []</span><br><span class="line">        <span class="keyword">for</span> t <span class="keyword">in</span> data_list:</span><br><span class="line">            ll.append(t[i])</span><br><span class="line">        var = computeVariance(ll)</span><br><span class="line">        <span class="keyword">if</span> var &gt; max_var:</span><br><span class="line">            max_var = var</span><br><span class="line">            split = i</span><br><span class="line">    <span class="comment"># 根据划分域的数据对数据点进行排序</span></span><br><span class="line">    data_list.sort(key=<span class="keyword">lambda</span> x: x[split])</span><br><span class="line">    <span class="comment"># 选择下标为len / 2的点作为分割点</span></span><br><span class="line">    elt = data_list[LEN // <span class="number">2</span>]</span><br><span class="line">    root = KD_node(elt, split)</span><br><span class="line">    root.left = createKDTree(root.left, data_list[<span class="number">0</span>:(LEN // <span class="number">2</span>)])</span><br><span class="line">    root.right = createKDTree(root.right, data_list[(LEN // <span class="number">2</span> + <span class="number">1</span>):LEN])</span><br><span class="line">    <span class="keyword">return</span> root</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">computeVariance</span><span class="params">(arrayList)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    @param: arrayList list: 存放的数据点</span></span><br><span class="line"><span class="string">    @return: variance number: 返回数据点的方差</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    <span class="keyword">for</span> ele <span class="keyword">in</span> arrayList:</span><br><span class="line">        ele = float(ele)</span><br><span class="line">    LEN = float(len(arrayList))</span><br><span class="line">    array = np.array(arrayList)</span><br><span class="line">    sum1 = array.sum()</span><br><span class="line">    array2 = array * array</span><br><span class="line">    sum2 = array2.sum()</span><br><span class="line">    mean = sum1 / LEN</span><br><span class="line">    <span class="comment">#D[X] = E[x^2] - (E[x])^2</span></span><br><span class="line">    variance = sum2 / LEN - mean**<span class="number">2</span></span><br><span class="line">    <span class="keyword">return</span> variance</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">findNN</span><span class="params">(root, query)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    @param: root KD_node: KDTree的树根</span></span><br><span class="line"><span class="string">    @param: query Data: 查询点</span></span><br><span class="line"><span class="string">    @return: NN,mindist KD_node,number: 返回距离data最近的点NN，同时返回最短距离min_dist</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    <span class="comment"># 初始化为root的节点</span></span><br><span class="line">    NN = root.elt</span><br><span class="line">    min_dist = computeDist(query, NN)</span><br><span class="line">    nodeList = []</span><br><span class="line">    temp_root = root</span><br><span class="line">    <span class="comment"># 二分查找建立路径</span></span><br><span class="line">    <span class="keyword">while</span> temp_root:</span><br><span class="line">        nodeList.append(temp_root)</span><br><span class="line">        dd = computeDist(query, temp_root.elt)</span><br><span class="line">        <span class="keyword">if</span> min_dist &gt; dd:</span><br><span class="line">            NN = temp_root.elt</span><br><span class="line">            min_dist = dd</span><br><span class="line">        <span class="comment"># 当前节点的划分域</span></span><br><span class="line">        ss = temp_root.split</span><br><span class="line">        <span class="keyword">if</span> query[ss] &lt;= temp_root.elt[ss]:</span><br><span class="line">            temp_root = temp_root.left</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            temp_root = temp_root.right</span><br><span class="line">    <span class="comment"># 回溯查找</span></span><br><span class="line">    <span class="keyword">while</span> nodeList:</span><br><span class="line">        <span class="comment"># 使用list模拟栈，后进先出</span></span><br><span class="line">        back_elt = nodeList.pop()</span><br><span class="line">        ss = back_elt.split</span><br><span class="line">        <span class="comment"># 判断是否需要进入父亲节点的子空间进行搜索</span></span><br><span class="line">        <span class="keyword">if</span> abs(query[ss] - back_elt.elt[ss]) &lt; min_dist:</span><br><span class="line">            <span class="keyword">if</span> query[ss] &lt;= back_elt.elt[ss]:</span><br><span class="line">                temp_root = back_elt.right</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                temp_root = back_elt.left</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> temp_root:</span><br><span class="line">                nodeList.append(temp_root)</span><br><span class="line">                curDist = computeDist(query, temp_root.elt)</span><br><span class="line">                <span class="keyword">if</span> min_dist &gt; curDist:</span><br><span class="line">                    min_dist = curDist</span><br><span class="line">                    NN = temp_root.elt</span><br><span class="line">    <span class="keyword">return</span> NN, min_dist</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">computeDist</span><span class="params">(pt1, pt2)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    @function: 计算两个数据点的距离</span></span><br><span class="line"><span class="string">    @param: pt1, pt2 point: 输入的数据点</span></span><br><span class="line"><span class="string">    @return: sum number: pt1和pt2之间的距离</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    sum = <span class="number">0.0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(pt1)):</span><br><span class="line">        sum = sum + (pt1[i] - pt2[i]) * (pt1[i] - pt2[i])</span><br><span class="line">    <span class="keyword">return</span> math.sqrt(sum)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    root = KD_node()</span><br><span class="line">    Data = [[<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]] <span class="comment"># 简单的测试代码</span></span><br><span class="line">    Tree = createKDTree(root, Data) <span class="comment"># 建立树</span></span><br><span class="line"></span><br><span class="line">    NN, min_dist = findNN(Tree, [<span class="number">1</span>, <span class="number">3</span>, <span class="number">4</span>])</span><br><span class="line">    print(NN, min_dist)</span><br><span class="line">    NN, min_dist = findNN(Tree, [<span class="number">1</span>, <span class="number">1.5</span>, <span class="number">2</span>])</span><br><span class="line">    print(NN, min_dist)</span><br></pre></td></tr></table></figure>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://xjywq.me/2020/9/21/KD-Tree/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/data-structure/" rel="tag">data structure</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" rel="tag">统计学习方法</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+    
+      <a href="/2020/9/9/k%E8%BF%91%E9%82%BB%E6%B3%95/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">k近邻法</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "svqIzbPVNoHxRh5U9BhzxSUb-gzGzoHsz",
+    app_key: "SQ0W3YwIIzd3CVX14pxnJSPd",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020
+        <i class="ri-heart-fill heart_icon"></i> XJYWQ
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        Powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+        <span class="division">|</span>
+        Theme - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></s>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="XJYWQ"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>打赏我一下吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+<script src="/js/dz.js"></script>
+
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="86"
+        src="//music.163.com/outchain/player?type=2&id=543681750&auto=1&height=66"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+  </div>
+</body>
+
+</html>
