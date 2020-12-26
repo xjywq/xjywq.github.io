@@ -336,4 +336,142 @@
         <tag>统计学习方法</tag>
       </tags>
   </entry>
+  <entry>
+    <title>概率论与随机过程</title>
+    <url>/2020/12/25/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E9%9A%8F%E6%9C%BA%E8%BF%87%E7%A8%8B/</url>
+    <content><![CDATA[<h2 id="写在开头"><a href="#写在开头" class="headerlink" title="写在开头"></a>写在开头</h2><p>本文创作于期末考试前3天, 根据目录整理概率论与随机过程课程学习的要点, 同时方便以后进行复习和重复使用.<br>课程用书: 《概率论与随机过程》(北京邮电大学出版社)</p>
+<a id="more"></a>
+
+<h2 id="第一章-随机事件和概率"><a href="#第一章-随机事件和概率" class="headerlink" title="第一章 随机事件和概率"></a>第一章 随机事件和概率</h2><h3 id="随机事件及其运算"><a href="#随机事件及其运算" class="headerlink" title="随机事件及其运算"></a>随机事件及其运算</h3><ol>
+<li><p>随机事件、样本空间、样本点的定义</p>
+</li>
+<li><p>对于事件的关系与运算有</p>
+<ul>
+<li>$\bar{A}=\Omega-A,\bar{\Omega}=\emptyset,\bar{\emptyset}=\Omega$</li>
+<li>若$A\subset B$, 则$\bar{B}\subset\bar{A}$</li>
+<li>$A-B=A\bar{B}=A-AB,A=AB\cup A\bar{B},A(B\cup\bar{B})=A$</li>
+<li>$A\cup B=A\cup\bar{A}B=B\cup A\bar{B},A\cup B\cup C=A\cup\bar{A}B\cup\bar{A}\bar{B}C$</li>
+<li>若 $A、B$ 互为对立事件, 则 $A、B$ 互不相容</li>
+</ul>
+</li>
+<li><p>事件的运算符合四种运算法则: 交换律、结合律、分配律、对欧律</p>
+</li>
+</ol>
+<h3 id="古典概型、几何概型"><a href="#古典概型、几何概型" class="headerlink" title="古典概型、几何概型"></a>古典概型、几何概型</h3><ol>
+<li><p>古典概型</p>
+<ul>
+<li><p>以有限可能发生有限种基本事件</p>
+</li>
+<li><p>古典概型的概率: $P(A)=\dfrac{r}{n}$</p>
+</li>
+<li><p>古典概型具有下列性质:</p>
+<ul>
+<li>非负性: 对于每个事件 $A$, 有 $0\leqslant P(A)\leqslant1$</li>
+<li>规范性: $P(\Omega)=1$</li>
+<li>有限可加性: $$P\left(\bigcup_{i=1}^mA_i\right)=\sum_{i=1}^mP(A_i)$$</li>
+</ul>
+</li>
+<li><p>对于古典概率问题, 关键在于正确计算样本空间大小和事件所包含的样本点个数</p>
+</li>
+</ul>
+</li>
+<li><p>几何概率</p>
+<ul>
+<li>几何概率中每个样本点出现的概率依旧是等可能的, 但是将样本点的个数拓展到无穷, 将试验几何抽象后计算有限的几何度量. 满足如下条件的被称为几何概率:<ol>
+<li>样本空间是直线或者二维、三维空间中的有限的区间或区域</li>
+<li>样本点在其上是均匀分布的</li>
+</ol>
+</li>
+<li>在几何概型中若样本空间 $\Omega$ 对应的区域的度量为 $L(\Omega)$, 且事件 $A$ 的度量为 $L(A)$, 则事件 $A$ 的概率为 $P(A)=\dfrac{L(A)}{L(\Omega)}$</li>
+<li>几何概型具有以下性质<ul>
+<li>非负性: 对于每个事件 $A$, 有 $0\leqslant P(A)\leqslant1$</li>
+<li>规范性: $P(\Omega)=1$</li>
+<li>可列可加性: 若 $A_1,A_2,\dots$ 是两两互不相容的事件, 则有: $$P\left(\bigcup_{i=1}^mA_i\right)=\sum_{i=1}^mP(A_i)$$</li>
+</ul>
+</li>
+<li>*贝特朗(Bertrand)悖论<br>在单位圆上随机做一条弦, 求其长度超过该圆内接等边三角形边长的概率. 根据不同的理论可以得到多种不同的解答, 且都是正确的.<br><a href="https://baike.baidu.com/item/%E8%B4%9D%E7%89%B9%E6%9C%97%E6%82%96%E8%AE%BA" target="_blank" rel="noopener">百度链接</a></li>
+</ul>
+</li>
+</ol>
+<h3 id="条件概率、乘法公式、全概率公式、Bayes公式"><a href="#条件概率、乘法公式、全概率公式、Bayes公式" class="headerlink" title="条件概率、乘法公式、全概率公式、Bayes公式"></a>条件概率、乘法公式、全概率公式、Bayes公式</h3><ol>
+<li>条件概率与乘法公式<ul>
+<li>在实际问题中, 除了要考虑事件 $A$ 和其概率 $P(A)$ 还要考虑其在某些附加条件(已知条件)下的概率. 通常以 “事件 $B$” 已发生的形式给出, 此时事件 $A$ 的概率称为条件概率, 记为 $P(A|B)$</li>
+<li>定义: $P(A|B)=\dfrac{P(AB)}{P(B)}$</li>
+<li>条件概率有如下性质:<ul>
+<li>$0\leqslant P(A|B)\leqslant1$</li>
+<li>$P(\Omega|B)=1$</li>
+<li>若 $A_1,A_2,\dots,$ 是两两互不相容事件, 则有:$$P(\cup_{i=1}^\infty A_i|B)=\sum_{i=1}^\infty P(A_i|B)$$</li>
+</ul>
+</li>
+<li>乘法公式: $P(AB)=P(A|B)P(B)=P(B|A)P(A)$<br>推广后有: $P(ABC)=P(C|AB)P(B|A)P(B)$</li>
+</ul>
+</li>
+<li>全概率公式<br>$$P(A)=\sum_{i=1}^\infty P(A|B_i)P(B_i)$$</li>
+<li>Bayes公式<br>$$P(B_i|A)=\dfrac{P(B_iA)}{P(A)}=\dfrac{P(A|B_i)P(B_i)}{\sum_{k=1}^{n}P(A|B_k)P(B_k)}$$</li>
+</ol>
+<h3 id="事件的独立性"><a href="#事件的独立性" class="headerlink" title="事件的独立性"></a>事件的独立性</h3><p>两个事件相互独立表明一件事件的发生与否不影响另一个事件的发生, $A、B$ 事件独立的充要条件为 $P(AB)=P(A)P(B)$<br>当两个事件互相独立时有性质: $P(A)=P(A|B)、P(B)=P(B|A)$<br>对于多个事件的独立性有: $P(A_1A_2…A_n)=P(A_1)P(A_2)…P(A_n)$</p>
+<h3 id="伯努利模型"><a href="#伯努利模型" class="headerlink" title="伯努利模型"></a>伯努利模型</h3><p>若实验 $E$ 只有 $A$ 和 $\bar{A}$ 两种结果且 $P(A)=p$, 则称 $E$ 为伯努利实验, 若将 $E$ 独立重复 $n$ 次, 则称这种实验为 $n$ 重伯努利实验.<br>令 $P(A)=p$, 则在 $n$ 重实验中事件 $A$ 恰好出现 $k$ 次的概率为 $P_n(k)=C_n^kp^k(1-p)^{n-k}$</p>
+<h2 id="第二章-随机变量及其分布"><a href="#第二章-随机变量及其分布" class="headerlink" title="第二章 随机变量及其分布"></a>第二章 随机变量及其分布</h2><h3 id="随机变量的定义和分布函数"><a href="#随机变量的定义和分布函数" class="headerlink" title="随机变量的定义和分布函数"></a>随机变量的定义和分布函数</h3><p>设 $X$ 为随机变量, 则称函数$$F(x)=P(X\leqslant x)=P{\omega|X(\omega)\leqslant x}$$为随机变量 $X$ 的分布函数, 可以简写为 $d.f.$<br>分布函数具有一家基本性质:</p>
+<ol>
+<li>不减性: 若 $x_1&lt;x_2$, 则 $F(x_1)&lt;F(x_2)$</li>
+<li>规范性: $0\leqslant F(x)\leqslant1$, 且 $\lim_{x\rightarrow-\infty}=0,~\lim_{x\rightarrow\infty}=1$</li>
+<li>右连续性: 对于任意实数 $x$, $F(x+0)=F(x)$</li>
+</ol>
+<h3 id="离散型随机变量"><a href="#离散型随机变量" class="headerlink" title="离散型随机变量"></a>离散型随机变量</h3><p>离散型随机变量 $X$ 的分布律一般使用表格或图形的形式:</p>
+<table>
+<thead>
+<tr>
+<th>X</th>
+<th>$x_1$</th>
+<th>$x_2$</th>
+<th>$…$</th>
+<th>$x_n$</th>
+<th>$…$</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>P</td>
+<td>$p_1$</td>
+<td>$p_2$</td>
+<td>$…$</td>
+<td>$p_n$</td>
+<td>$…$</td>
+</tr>
+</tbody></table>
+<p>分布律具有如下性质:</p>
+<ol>
+<li><p>非负性: $p_k\geqslant0,k=1,2,…$</p>
+</li>
+<li><p>规范性: $\sum_{k=1}^\infty p_k=1$<br>几种常见的离散型随机变量</p>
+</li>
+<li><p>二项分布与 $n$重伯努利实验<br>若离散型变量 $X$ 的分布律为 $P_n(k)=C_n^kp^k(1-p)^{n-k}$, 则称 $X$ 服从参数为 $n,p$ 的二项分布, 记为 $X\sim b(n,p)$<br>泊松定理为二项分布提供了简易计算的方法, 当 $n$ 很大而 $p$ 很小的时候有$$C_n^kp^k(1-p)^{n-k}\approx\dfrac{\lambda^ke^{-\lambda}}{k!}$$<br>其中 $\lambda=np$</p>
+</li>
+<li><p>泊松分布与泊松流<br>设离散性随机变量 $X$ 的分布律为$$P{X=k}=\dfrac{\lambda^ke^{-\lambda}}{k!},k=1,2,…$$<br>其中 $\lambda&gt;0$ 是常数, 则称 $X$ 是服从参数为 $\lambda$ 的泊松分布, 记为 $X\sim\pi(\lambda)$</p>
+</li>
+</ol>
+<h3 id="连续型随机变量"><a href="#连续型随机变量" class="headerlink" title="连续型随机变量"></a>连续型随机变量</h3><p>设变量 $X$ 的分布函数为 $F(x)$, 若存在非负函数 $f(x)$ 使得对于任意实数 $x$ 有:$$F(x)=\int_{-\infty}^{x}f(t)dt$$则称 $X$ 为连续型随机变量, 其中函数 $f(x)$ 称为随机变量 $X$ 的概率密度函数, 简称为概率密度, 可简写为 $p.d.$<br>对于连续型随机变量的分布函数有如下性质:</p>
+<ol>
+<li>$F(x)$ 为连续函数</li>
+<li>对于连续型随机变量 $X$, 它取指定实数 $a$ 的概率均为 $0$, 即 $P{X=a}=0$</li>
+</ol>
+<p>三种重要的连续型随机变量</p>
+<ol>
+<li>均匀分布<br>$$f(x)=\begin{cases}\dfrac{1}{b-a},&amp;a&lt;x&lt;b\0,&amp;其他\end{cases}$$<br>称 $X$ 在区间 $(a,b)$ 上服从均匀分布, 记为 $X\sim U(a,b)$</li>
+<li>指数分布<br>设连续型随机变量 $X$ 的概率密度为$$f(x)=\begin{cases}\lambda e^{-\lambda x},&amp;x&gt;0\0,&amp;x\leqslant0\end{cases}$$其中 $\lambda&gt;0$ 为常数, 则称 $X$ 服从参数为 $\lambda$ 的指数分布, 记为 $X\sim Ex(\lambda)$<br>指数分布的分布函数为$$F(x)=\begin{cases}1-e^{-\lambda x},&amp;x&gt;0\0,&amp;x\leqslant0\end{cases}$$<br>指数函数有一个很重要的特性是无记忆性, 即对于任意 $s&gt;0,t&gt;0$, 有$$P{X\geqslant s+t|X\geqslant s}=P{X\geqslant t}$$</li>
+<li>正态分布<br>设随机变量 $X$ 的概率密度为$$f(x)=\dfrac{1}{\sqrt{2\pi}\sigma}e^{-\dfrac{(x-\mu)^2}{2\sigma^2}},-\infty&lt;x&lt;+\infty$$其中 $\mu,\sigma(\sigma&gt;0)$ 是常数, 则称 $X$ 服从参数为 $\mu,\sigma^2$ 的正态分布, 记为 $X\sim N(\mu,\sigma^2)$<br>若 $\mu=0,\sigma=1$, 则称为标准正态分布, 记为 $\Phi(x)=\dfrac{1}{\sqrt{2\pi}}\int_{-\infty}^{x}e^{-\dfrac{t^2}{2}}dt$, 通常使用查表的方式求值<br>容易证明 $\Phi(x)$ 有如下常用性质:<ol>
+<li>对于任意实数 $x$, 有 $\Phi(x)+\Phi(-x)=1$</li>
+<li>$\Phi(0)=0.5$</li>
+<li>若 $X\sim N(\mu, \sigma^2)$, 分布函数为 $F(x)$, 则 $F(x)=\Phi(\dfrac{x-\mu}{\sigma})$</li>
+</ol>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>课程笔记</category>
+      </categories>
+      <tags>
+        <tag>课程笔记</tag>
+        <tag>概率论</tag>
+      </tags>
+  </entry>
 </search>
