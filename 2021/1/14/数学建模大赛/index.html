@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">752</span>
+            <span class="post-count">1.3k</span>
         </span>
     </span>
 
@@ -87,7 +87,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">2 min</span>
+            <span class="post-count">4 min</span>
         </span>
     </span>
 </div>
@@ -147,7 +147,7 @@
 </li>
 </ol>
 <h4 id="2-树"><a href="#2-树" class="headerlink" title="2. 树"></a>2. 树</h4><ol>
-<li>最小生成树<br>非常棒的B站视频, <a href="https://www.bilibili.com/video/BV1Eb41177d1?from=search&seid=9978770545718154739" target="_blank" rel="noopener">点击此处</a>跳转.<ol>
+<li>最小生成树<br>非常棒的B站视频, <a href="https://www.bilibili.com/video/BV1Eb41177d1?from=search&seid=9978770545718154739" target="_blank" rel="noopener">点击此处</a>跳转.<ol start="2">
 <li>Kruskal算法<br>将所有边变成一个集合, 每次选取最小边, 判断是否形成环, 直到选取了 $n-1$ 条边则已经选出了最小生成树.</li>
 <li>Prim算法<br>循环维护 $3$ 个列表, 选定点集合, 最小边集合和母边集合. 每次从已选定点和未选定点中选择最短 “桥梁”, 知道所有点都在同一个集合之中.</li>
 </ol>
@@ -155,6 +155,49 @@
 <li>哈夫曼树<br>本质上为一种编码树, 是构成某些内容的最小生成编码树.</li>
 <li>斯坦纳树<br>斯坦纳树问题是组合优化问题, 与最小生成树相似, 是最短网络的一种. 最小生成树是在给定的点集和边中寻求最短网络使所有点连通. 而最小斯坦纳树允许在给定点外增加额外的点, 使生成的最短网络开销最小.</li>
 </ol>
+<h4 id="3-组合优化问题"><a href="#3-组合优化问题" class="headerlink" title="3. 组合优化问题"></a>3. 组合优化问题</h4><ol>
+<li>着色<br>NP-完全问题, 分为点着色, 边着色和m-着色等.</li>
+<li>覆盖<ol>
+<li>最小边覆盖</li>
+<li>最小顶点覆盖</li>
+<li>最小路径覆盖</li>
+</ol>
+</li>
+<li>拓扑排序<ul>
+<li>有向无环图</li>
+<li>如果存在边 <code>u, v</code>, 则 <code>u</code> 将在 <code>v</code> 上方</li>
+</ul>
+</li>
+</ol>
+<h4 id="4-流"><a href="#4-流" class="headerlink" title="4. 流"></a>4. 流</h4><ol>
+<li>最小和最大流<ol>
+<li>增广路径算法</li>
+<li>最短增广路算法(SAP)</li>
+<li>Dicnic算法<br><code>节点 &gt;&gt; 路径</code> 时应该用SAP, <code>路径 &gt;&gt; 节点</code> 时用Dinic.</li>
+<li>最高标号预流推进算法(HLPP)<br>已知几乎效率最高, 但是代码量大且不好理解, 采用预流推进的方法.</li>
+</ol>
+</li>
+<li>最小费用最大流<ol>
+<li>Bellman-Ford<br>可以解决负权边, 但是不能解决负环.</li>
+<li>SPFA算法<br>在稀疏图上十分高效, 但一般情况下速度较慢.</li>
+<li>改进的Dijkstra算法<br>无法直接处理负权边图, 但是速度较快.</li>
+</ol>
+</li>
+<li>匹配问题<ol>
+<li>一般图的最大匹配<br>带花树算法, <a href="https://www.cnblogs.com/BAJimH/p/10569418.html" target="_blank" rel="noopener">优秀文章链接</a></li>
+<li>二分图的最大匹配<br>匈牙利算法, <a href="https://blog.csdn.net/u013384984/article/details/90718287" target="_blank" rel="noopener">优秀文章链接</a></li>
+</ol>
+</li>
+</ol>
+<h3 id="时间序列模型"><a href="#时间序列模型" class="headerlink" title="时间序列模型"></a>时间序列模型</h3><p>带有时间戳的一系列数据被成为时间序列, 对该序列建模被称为时间序列建模.<br>时间序列的分析可以从 <code>频域</code> 和 <code>时间域</code> 进行分析.<br>时间序列一个很重要的性质就是平稳性, 其中又分为严平稳和宽平稳.<br>对于平稳性不是很好的时间序列, 可以通过差分法(类似求导)使其获得较好的平稳性.</p>
+<ol>
+<li>自回归模型(AR)<br>描述当前值与历史值之间的关系, 用历史值对当前值进行预测.</li>
+<li>移动平均模型(MA)<br>移动平均模型较为关注自回归模型中误差项的累加, 能较好的消除预测中的随机波动.</li>
+<li>差分自回归<br>是差分, 自回归模型和移动平均模型的结合.</li>
+<li>定参<br>对于以上两个模型, 我们可以使用一些具体的算法求解阶数(例如ACF自相关函数的拖尾和截尾)</li>
+</ol>
+<h3 id="微分方程模型"><a href="#微分方程模型" class="headerlink" title="微分方程模型"></a>微分方程模型</h3><p>关键点在于如何找到一步的变化 $dv/dt$, 在正式的比赛中感觉十分鸡肋.</p>
+<h3 id="基本机器学习模型"><a href="#基本机器学习模型" class="headerlink" title="基本机器学习模型"></a>基本机器学习模型</h3><p>明天更新, 下次一定.</p>
  
       <!-- reward -->
       
