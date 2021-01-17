@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">1.3k</span>
+            <span class="post-count">1.7k</span>
         </span>
     </span>
 
@@ -87,7 +87,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">4 min</span>
+            <span class="post-count">6 min</span>
         </span>
     </span>
 </div>
@@ -197,7 +197,28 @@
 <li>定参<br>对于以上两个模型, 我们可以使用一些具体的算法求解阶数(例如ACF自相关函数的拖尾和截尾)</li>
 </ol>
 <h3 id="微分方程模型"><a href="#微分方程模型" class="headerlink" title="微分方程模型"></a>微分方程模型</h3><p>关键点在于如何找到一步的变化 $dv/dt$, 在正式的比赛中感觉十分鸡肋.</p>
-<h3 id="基本机器学习模型"><a href="#基本机器学习模型" class="headerlink" title="基本机器学习模型"></a>基本机器学习模型</h3><p>明天更新, 下次一定.</p>
+<h3 id="基本机器学习模型"><a href="#基本机器学习模型" class="headerlink" title="基本机器学习模型"></a>基本机器学习模型</h3><ol>
+<li>线性回归<ol>
+<li>如果目标是预测或者映射, 线性回归可以用来对观测数据集的和X的值拟合出一个预测模型. 当完成这样一个模型以后, 对于一个新增的 $X$ 值, 在没有给定与它相配对的 $y$ 的情况下, 可以用这个拟合过的模型预测出一个y值.</li>
+<li>给定一个变量 $y$ 和一些变量 $X_1,…,X_p$, 这些变量有可能与 $y$ 相关, 线性回归分析可以用来量化 $y$ 与 $X_j$ 之间相关性的强度, 评估出与 $y$ 不相关的$X_j$, 并识别出哪些 $X_j$ 的子集包含了关于 $y$ 的冗余信息.</li>
+</ol>
+</li>
+<li>梯度下降<br>对函数求梯度, 也就是收敛的方向.<br>如果模型复杂, 则可以使用随机梯度下降法或者批量梯度下降法.</li>
+<li>逻辑回归<br>虽然叫做回归, 但其实是分类模型, 尤其针对二分类问题, 本质是: 假设数据服从这个分布, 然后使用极大似然估计做参数的估计.</li>
+<li>主成分分析(PCA)<br>是一种矩阵降维方法, 可以降低算法的开销, 并且达到一定的去除噪声的作用. 具体的实现方法是通过奇异值分解协方差矩阵得到的, 在 <code>sklearn</code> 库中可以直接调用.</li>
+</ol>
+<h3 id="深度学习方法"><a href="#深度学习方法" class="headerlink" title="深度学习方法"></a>深度学习方法</h3><ol>
+<li>NN</li>
+<li>ResNet</li>
+<li>CNN</li>
+<li>RNN</li>
+<li>LSTM</li>
+<li>GCN</li>
+<li>Transformer</li>
+<li>更多模型详见<a href="https://blog.csdn.net/clover_my/article/details/90211793" target="_blank" rel="noopener">链接</a></li>
+<li>该博主的<a href="https://blog.csdn.net/clover_my/article/details/90203146" target="_blank" rel="noopener">其他讲解</a></li>
+</ol>
+<h3 id="数据挖掘算法"><a href="#数据挖掘算法" class="headerlink" title="数据挖掘算法"></a>数据挖掘算法</h3><p>明天更新, 同时开始更新下一个博客–可视化方法.</p>
  
       <!-- reward -->
       
