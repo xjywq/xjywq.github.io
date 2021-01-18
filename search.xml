@@ -5,10 +5,10 @@
     <url>/2020/7/2/Avltree/</url>
     <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><ul>
 <li>平衡树是基于二叉查找树的一种数据结构,添加了更加严格的管理制度用以保证树的高度,即<strong>每一个节点的左右子树深度之差</strong>不超过 1.</li>
-<li>但是条件可能过于严格,导致插入和删除的操作会导致数据大量的移动.<a id="more"></a>
-
-</li>
+<li>但是条件可能过于严格,导致插入和删除的操作会导致数据大量的移动.</li>
 </ul>
+<a id="more"></a>
+
 <h2 id="结构实现"><a href="#结构实现" class="headerlink" title="结构实现"></a>结构实现</h2><ul>
 <li>储存方式依旧是二叉树储存,对于每个节点需要添加一个关键字<code>depth</code>用来储存该节点的深度.</li>
 <li>对于插入操作,可能会引起深度的变化导致失衡,我们把失衡的节点叫做危机节点,此时需要调整危机节点及周围节点.</li>
@@ -37,7 +37,7 @@
 
 <h3 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h3><ul>
 <li>对于一般的插入,我们只需要从下至上修改节点的深度即可</li>
-<li>如果遇到节点失衡,一般来说会有四种情况, 我们先假设插入到 <strong>A</strong> 节点左节点的左节点, 如图中 <strong>F</strong> 节点为插入节点:<br><img src="https://raw.githubusercontent.com/xjywq/picgo/master/avltree1.jpg" alt="avltree1"><br>此时需要将危机节点左节点的右子树变成右节点的左子树, 同样是做一次旋转使得 <strong>A</strong> 下放, <strong>B</strong> 上升, 注意 <strong>D</strong> 节点的位置, 旋转结果如下:<br><img src="https://raw.githubusercontent.com/xjywq/picgo/master/avltree2.jpg" alt="avltree2"><br>这种方法我们一般称之为单旋转, 即只需要做一次旋转即可, 如图中插入左节点的左节点, 这种旋转方法被称为 <strong>LL</strong> 方法.<br>同样右节点的右节点插入失衡的调节我们称之为 <strong>RR</strong> 方法.</li>
+<li>如果遇到节点失衡,一般来说会有四种情况, 我们先假设插入到 <strong>A</strong> 节点左节点的左节点, 如图中 <strong>F</strong> 节点为插入节点:<br><img src="/picture/Avltree/avltree1.jpg" alt="avltree1"><br>此时需要将危机节点左节点的右子树变成右节点的左子树, 同样是做一次旋转使得 <strong>A</strong> 下放, <strong>B</strong> 上升, 注意 <strong>D</strong> 节点的位置, 旋转结果如下:<br><img src="/picture/Avltree/avltree2.jpg" alt="avltree2"><br>这种方法我们一般称之为单旋转, 即只需要做一次旋转即可, 如图中插入左节点的左节点, 这种旋转方法被称为 <strong>LL</strong> 方法.<br>同样右节点的右节点插入失衡的调节我们称之为 <strong>RR</strong> 方法.</li>
 </ul>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">Node *<span class="title">avlRotate_LL</span><span class="params">(Node *node)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Node *new_root = node-&gt;left;</span><br><span class="line">    node-&gt;left = new_root-&gt;right;</span><br><span class="line">    new_root-&gt;right = node;</span><br><span class="line">    update_depth(node);</span><br><span class="line">    update_depth(new_root);</span><br><span class="line">    <span class="keyword">return</span> new_root;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -49,9 +49,9 @@
 <ul>
 <li>如果插入节点在危机节点左节点的右节点, 用 <strong>LL</strong> 方法则会出现不平衡.</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/xjywq/picgo/master/avltree3.jpg" alt="avltree3"></p>
+<p><img src="/picture/Avltree/avltree3.jpg" alt="avltree3"></p>
 <p>所以我们需要先对 <strong>A</strong> 的左节点 <strong>B</strong> 进行一次 <strong>RR</strong> 旋转, 使 <strong>A</strong> 转变为单旋转的情况, 然后再对 <strong>A</strong> 进行 <strong>LL</strong> 旋转得到正确结果.</p>
-<p><img src="https://raw.githubusercontent.com/xjywq/picgo/master/avltree4.jpg" alt="avltree4"><br><img src="https://raw.githubusercontent.com/xjywq/picgo/master/avltree5.jpg" alt="avltree5"></p>
+<p><img src="/picture/Avltree/avltree4.jpg" alt="avltree4"><br><img src="/picture/Avltree/avltree5.jpg" alt="avltree5"></p>
 <p>这种方法用到了两次旋转, 所以被称为双旋转, 或者 <strong>LR</strong> 方法.<br>同样我们也可以类似得出 <strong>RL</strong> 方法.</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">Node *<span class="title">avlRotate_LR</span><span class="params">(Node *node)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    avlRotate_RR(node-&gt;left);</span><br><span class="line">    <span class="keyword">return</span> avlRotate_LL(node);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">Node *<span class="title">avlRotate_RL</span><span class="params">(Node *node)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    avlRotate_LL(node-&gt;left);</span><br><span class="line">    <span class="keyword">return</span> avlRotate_RR(node);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -593,7 +593,80 @@
 <li>更多模型详见<a href="https://blog.csdn.net/clover_my/article/details/90211793" target="_blank" rel="noopener">链接</a></li>
 <li>该博主的<a href="https://blog.csdn.net/clover_my/article/details/90203146" target="_blank" rel="noopener">其他讲解</a></li>
 </ol>
-<h3 id="数据挖掘算法"><a href="#数据挖掘算法" class="headerlink" title="数据挖掘算法"></a>数据挖掘算法</h3><p>明天更新, 同时开始更新下一个博客–可视化方法.</p>
+<h3 id="数据处理方法"><a href="#数据处理方法" class="headerlink" title="数据处理方法"></a>数据处理方法</h3><ol>
+<li>数据清洗<ol>
+<li>填入有效数据<ul>
+<li>删除法</li>
+<li>高频代替法</li>
+<li>均值法</li>
+<li>插值法</li>
+<li>回归法</li>
+<li>聚类法</li>
+</ul>
+</li>
+<li>平滑数据噪声<ul>
+<li>移动平均模型</li>
+<li>中值滤波</li>
+<li>盒子法</li>
+<li>高斯窗法</li>
+<li>聚类法</li>
+<li>函数拟合法</li>
+</ul>
+</li>
+<li>检测和处理异常值<ul>
+<li>近邻检测</li>
+<li>3 $\sigma$ 原则</li>
+<li>聚类检测</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>数据集成<ol>
+<li>多个数据集结合</li>
+<li>解决不一致性(单位)</li>
+<li>特征编码</li>
+<li>数据分类<ul>
+<li>决策树(ID3算法)</li>
+<li>支持向量机(SVM)</li>
+<li>随机森林</li>
+<li>神经网络</li>
+<li>K-means聚类</li>
+<li>DBSCAN</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>数据标准化<br>除了最基本的归一化, 去单位化以外, 还应当规定分位数等, 同时也可以做一些数学变化(如取对数).</li>
+<li>数据归约<br>在可能获得相似结果的前提下, 对数据进行缩减(PCA等), 或者以区间代替单值.</li>
+</ol>
+]]></content>
+      <categories>
+        <category>课程笔记</category>
+      </categories>
+      <tags>
+        <tag>课程笔记</tag>
+        <tag>数学建模大赛</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>seaborn进行数据可视化</title>
+    <url>/2021/1/18/seaborn%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><code>Seaborn</code> 是基于 <code>matplotlib</code> 的图形可视化 <code>python</code> 包. 它提供了一种高度交互式界面, 便于用户能够做出各种有吸引力的统计图表.</p>
+<p><code>Seaborn</code> 是在 <code>matplotlib</code> 的基础上进行了更高级的API封装, 从而使得作图更加容易, 在大多数情况下使用 <code>seaborn</code> 能做出很具有吸引力的图, 而使用 <code>matplotlib</code> 就能制作具有更多特色的图. 应该把 <code>Seaborn</code> 视为 <code>matplotlib</code> 的补充, 而不是替代物. 同时它能高度兼容 <code>numpy</code> 与 <code>pandas</code> 数据结构以及 <code>scipy</code> 与 <code>statsmodels</code> 等统计模式.</p>
+<a id="more"></a>
+
+<h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><h3 id="调用"><a href="#调用" class="headerlink" title="调用"></a>调用</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br></pre></td></tr></table></figure>
+
+<h3 id="选定主题"><a href="#选定主题" class="headerlink" title="选定主题"></a>选定主题</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">sns.set_style()</span><br></pre></td></tr></table></figure>
+
+<h3 id="选择数据集"><a href="#选择数据集" class="headerlink" title="选择数据集"></a>选择数据集</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">with</span> open(<span class="string">'fmri.csv'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    fmri = pd.read_csv(f, <span class="string">'\t'</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="绘制图像"><a href="#绘制图像" class="headerlink" title="绘制图像"></a>绘制图像</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">sns.lineplot(x=<span class="string">"timepoint"</span>, y=<span class="string">"signal"</span>,</span><br><span class="line">             hue=<span class="string">"region"</span>, style=<span class="string">"event"</span>,</span><br><span class="line">             data=fmri)</span><br></pre></td></tr></table></figure>
+
+<h3 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">sns.despine() <span class="comment"># 去除多余线</span></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>有一说一真就是全部调包, 感觉不需要什么特性, 临时查起来会快很多……<br>还是放一个中文处理的办法(虽然并不能用上)</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">plt.rcParams[<span class="string">'font.family'</span>] = [<span class="string">'Arial Unicode MS'</span>]</span><br><span class="line">plt.rcParams[<span class="string">'axes.unicode_minus'</span>] = <span class="literal">False</span></span><br><span class="line">sns.set_style(<span class="string">'whitegrid'</span>, &#123;<span class="string">'font.sans-serif'</span>: [<span class="string">'Arial Unicode MS'</span>, <span class="string">'Arial'</span>]&#125;)</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>课程笔记</category>
