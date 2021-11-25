@@ -687,7 +687,7 @@
 <p>机器人通常由串联的&quot;链式结构&quot;组成: <em>links 连杆</em>, <em>joints 关节</em>.<br>
 关节连接两个连杆.</p>
 </blockquote>
-<!---more--->
+<span id="more"></span>
 <h3 id="degree-of-freedom-自由度">Degree of Freedom 自由度</h3>
 <p>理想情况下, 每个关节都有<code>1</code>自由度 (自由度=关节数).<br>
 工业机器人通常都有<code>6</code>自由度, 但是<code>3</code>, <code>4</code>, <code>5</code>和<code>7</code>自由度也很常见.</p>
